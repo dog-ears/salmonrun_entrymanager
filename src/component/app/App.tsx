@@ -1,7 +1,18 @@
+// basic
 import React from 'react';
 import './App.scss';
 
-function App() {
+// redux
+import { useDispatch } from 'react-redux'
+import { useTypedSelector, addGuest } from 'store';
+
+type Props = {}
+
+const App: React.FC<Props> = (props) => {
+
+  // selector
+  const guests = useTypedSelector(state => state.guests)
+
   return (
     <div className="App">
       <section className="section-game">
@@ -45,12 +56,14 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td><input type="text" value="googleネーム" /></td>
-                <td><input type="text" value="switchネーム" /></td>
-                <td><button></button></td>
-              </tr>
+              {guests.map((guest) => (
+                <tr>
+                  <td><input type="text" value={`${guest.order}`} /></td>
+                  <td><input type="text" value={`${guest.gName}`} /></td>
+                  <td><input type="text" value={`${guest.sName}`} /></td>
+                  <td><button></button></td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
