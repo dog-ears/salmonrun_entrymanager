@@ -1,6 +1,11 @@
+@import "../../mixin";
+
 .section-game{
   width: 300px;
   padding: 10px;
+  @include sp{
+    width: 100%;
+  }
   > form{
     > h2{
       padding: 5px;

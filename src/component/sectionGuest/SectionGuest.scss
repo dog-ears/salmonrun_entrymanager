@@ -1,7 +1,12 @@
+@import "../../mixin";
+
 .section-guest{
   width: calc(100% - 600px);
   padding: 10px;
   border-left: 1px dashed #fff;
+  @include sp{
+    width: 100%;
+  }
   > .guests{
     > table{
       width: 100%;
