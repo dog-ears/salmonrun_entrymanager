@@ -1,0 +1,22 @@
+.section-guest{
+  width: calc(100% - 600px);
+  padding: 10px;
+  border-left: 1px dashed #fff;
+  > .guests{
+    > table{
+      width: 100%;
+      > thead,tbody{
+        > tr{
+          th,td{
+            padding: 5px;
+            line-height: 1.6em;
+          }
+        }
+      }
+    }
+    > .noGuest{
+      padding: 30px;
+      text-align: center;
+    }
+  }
+}
