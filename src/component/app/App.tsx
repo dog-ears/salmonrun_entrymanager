@@ -20,9 +20,9 @@ const App: React.FC<Props> = (props) => {
     <div className="App">
       <SectionGame />
       <SectionGuest />
-      <section className="section-setting">
+      {/* <section className="section-setting">
         <h2>設定</h2>
-      </section>
+      </section> */}
     </div>
   );
 }
