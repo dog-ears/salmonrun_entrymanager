@@ -45,7 +45,6 @@ const SectionGuest: React.FC<Props> = (props) => {
               <th>switchネーム</th>
               <th>参加回数</th>
               <th>状態</th>
-              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +55,6 @@ const SectionGuest: React.FC<Props> = (props) => {
                 <SectionGuestTd guestId={guest.id} guestProp='sName' />
                 <td>{guest.entrytimes}</td>
                 <SectionGuestTd guestId={guest.id} guestProp='isActive' />
-                <td><button></button></td>
               </tr>
             ))}
           </tbody>

@@ -52,6 +52,8 @@ const SectionGuest: React.FC<Props> = (props) => {
   return (
     <section className="section-game">
       <form action="">
+        <h1>1<small>戦目（2戦交代）</small></h1>
+        <div className="result">3<small>勝</small>3<small>敗</small><br /><small>（●〇●●〇●●〇●●）</small></div>
         <h2>参加中のゲスト</h2>
         <div className="guests">
           <ul>
@@ -78,7 +80,9 @@ const SectionGuest: React.FC<Props> = (props) => {
         </div>
         <div className="btn-basic _mt10">
           <ul>
-            <li><button className="-w100p" onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>参加中のゲストのゲーム回数を＋１する</button></li>
+            <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>勝利</button></li>
+            <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>敗北</button></li>
+            <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>参加者交代</button></li>
           </ul>
         </div>
       </form>

@@ -7,11 +7,25 @@
     width: 100%;
   }
   > form{
+    > h1{
+      text-align: center;
+      font-size: 46px;
+      & + .result{
+        margin-top: 20px;
+      }
+    }
+    > .result{
+      text-align: center;
+      font-size: 30px;
+      & + h2{
+        margin-top: 40px;
+      }
+    }
     > h2{
       padding: 5px;
       background-color: #ec572b;
       text-align: center;
-      font-size: 24px;
+      font-size: 30px;
       & + .guests{
         margin-top: 20px;
       }
@@ -29,7 +43,7 @@
         margin-top: 40px;
       }
       & + .btn-basic{
-        margin-top: 30px;
+        margin-top: 40px;
       }
     }
     > .btn-basic{

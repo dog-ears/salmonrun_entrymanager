@@ -14,7 +14,12 @@ code {
 
 .btn-basic{
   > ul{
+    display: flex;
     > li{
+      margin-right: 10px;
+      &:last-child{
+        margin-right: 0;
+      }
       > button{
         display: block;
         padding: 5px;
