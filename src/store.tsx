@@ -212,6 +212,17 @@ const slice = createSlice({
       return result
     },
 
+    // ゲスト全削除
+    deleteAllGuests: (state) => {
+
+      const result = {
+        ...state,
+        guests: []
+      }
+      saveState(result)
+      return result
+    },
+
     // リザルト格納
     addResult: (state, action: PayloadAction<string, ResultType>) => {
       const result = {
@@ -228,7 +239,7 @@ const slice = createSlice({
 })
 
 // action（各コンポーネントから、dispatchで呼ばれる）
-export const { addGuest, editGuest, editGuests, addResult, } = slice.actions;
+export const { addGuest, editGuest, editGuests, deleteAllGuests, addResult, } = slice.actions;
 
 // storeの生成
 export const store = configureStore({

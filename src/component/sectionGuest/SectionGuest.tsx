@@ -4,7 +4,7 @@ import './SectionGuest.scss';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { useTypedSelector, addGuest } from 'store';
+import { useTypedSelector, addGuest, deleteAllGuests } from 'store';
 
 // component
 import SectionGuestTd from 'component/sectionGuestTd/SectionGuestTd'
@@ -25,7 +25,15 @@ const SectionGuest: React.FC<Props> = (props) => {
   // handle（クリックなど画面操作時の処理）
   // ゲストの追加
   const handleAddGuest = () => {
-    dispatch(addGuest());
+    dispatch(addGuest())
+  }
+
+  // ゲストのクリア
+  const handleClearGuest = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    if (window.confirm("ゲストを全て削除します。よろしいですか？")) {
+      dispatch(deleteAllGuests())
+    }
   }
 
   return (
@@ -33,7 +41,8 @@ const SectionGuest: React.FC<Props> = (props) => {
       <h2>ゲスト一覧</h2>
       <div className="btn-basic _mt10">
         <ul>
-          <li><button onClick={handleAddGuest} ><i className="fas fa-user-plus"></i></button></li>
+          <li><button onClick={handleAddGuest} ><i className="fas fa-user-plus"></i> ゲストを追加する</button></li>
+          <li><button onClick={(e) => { handleClearGuest(e) }} ><i className="fas fa-trash-alt"></i> ゲストをクリアする</button></li>
         </ul>
       </div>
       <div className="guests _mt10">
