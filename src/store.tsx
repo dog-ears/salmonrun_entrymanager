@@ -25,11 +25,30 @@ type StateType = {
   results: ResultType[],
 };
 
+// ローカルストレージからの読み込み
+const loadState = (): StateType => {
+  const jsonStr: string | null = localStorage.getItem('salmon-entrymanager');
+  if (!jsonStr) {
+    return {
+      guests: [],
+      results: [],
+    }
+  }
+  const loadedState: StateType = Object.assign({
+    guests: [],
+    results: [],
+  }, JSON.parse(jsonStr))
+  return loadedState
+}
+
+// ローカルストレージに保存
+const saveState = (state: StateType) => {
+  const jsonStr: string = JSON.stringify(state);
+  localStorage.setItem('salmon-entrymanager', jsonStr);
+}
+
 // 初期状態。
-const initialState: StateType = {
-  guests: [],
-  results: [],
-};
+const initialState: StateType = loadState();
 
 interface PayloadOptionAction<T, P> {
   type: T;
@@ -47,17 +66,21 @@ const slice = createSlice({
   reducers: {
 
     // ゲスト追加
-    addGuest: (state, action: PayloadOptionAction<string, GuestType>) => ({
-      ...state,
-      guests: state.guests.concat(action.payload ? action.payload : {
-        id: state.guests.length + 1,
-        order: state.guests.length + 1,
-        gName: '-',
-        sName: '-',
-        entrytimes: 0,
-        isActive: true,
-      })
-    }),
+    addGuest: (state, action: PayloadOptionAction<string, GuestType>) => {
+      const result = {
+        ...state,
+        guests: state.guests.concat(action.payload ? action.payload : {
+          id: state.guests.length + 1,
+          order: state.guests.length + 1,
+          gName: '-',
+          sName: '-',
+          entrytimes: 0,
+          isActive: true,
+        })
+      }
+      saveState(result)
+      return result
+    },
 
     // ゲスト更新
     editGuest: (state, action: PayloadAction<string, GuestType>) => {
@@ -113,10 +136,12 @@ const slice = createSlice({
         guest.id === newGuestData.id ? newGuestData : guest
       )
 
-      return {
+      const result = {
         ...state,
         guests: newGuests
       }
+      saveState(result)
+      return result
     },
 
     // ゲスト更新（複数）
@@ -179,20 +204,26 @@ const slice = createSlice({
         return newGuestData
       })
 
-      return {
+      const result = {
         ...state,
         guests: newGuestsAll
       }
+      saveState(result)
+      return result
     },
 
     // リザルト格納
-    addResult: (state, action: PayloadAction<string, ResultType>) => ({
-      ...state,
-      results: state.results.concat([{
-        ...action.payload,
-        id: state.results.length + 1
-      }])
-    }),
+    addResult: (state, action: PayloadAction<string, ResultType>) => {
+      const result = {
+        ...state,
+        results: state.results.concat([{
+          ...action.payload,
+          id: state.results.length + 1
+        }])
+      }
+      saveState(result)
+      return result
+    },
   },
 })
 
