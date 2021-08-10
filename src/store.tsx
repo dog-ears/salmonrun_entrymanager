@@ -12,36 +12,23 @@ export type GuestType = {
   isActive: boolean,
 }
 
+// resultの型定義
+export type ResultType = {
+  id: number,
+  isVictory: boolean,
+  players: Number[],
+}
+
 // stateの型定義
 type StateType = {
   guests: GuestType[],
+  results: ResultType[],
 };
 
 // 初期状態。
 const initialState: StateType = {
-  guests: [
-    // {
-    //   id: 1,
-    //   gName: 'googleねーむ1',
-    //   sName: 'switchねーむ1',
-    //   order: 1,
-    //   isActive: true,
-    // },
-    // {
-    //   id: 2,
-    //   gName: 'googleねーむ2',
-    //   sName: 'switchねーむ2',
-    //   order: 2,
-    //   isActive: true,
-    // },
-    // {
-    //   id: 3,
-    //   gName: 'googleねーむ3',
-    //   sName: 'switchねーむ3',
-    //   order: 3,
-    //   isActive: true,
-    // },
-  ],
+  guests: [],
+  results: [],
 };
 
 interface PayloadOptionAction<T, P> {
@@ -196,12 +183,21 @@ const slice = createSlice({
         ...state,
         guests: newGuestsAll
       }
-    }
+    },
+
+    // リザルト格納
+    addResult: (state, action: PayloadAction<string, ResultType>) => ({
+      ...state,
+      results: state.results.concat([{
+        ...action.payload,
+        id: state.results.length + 1
+      }])
+    }),
   },
 })
 
 // action（各コンポーネントから、dispatchで呼ばれる）
-export const { addGuest, editGuest, editGuests, } = slice.actions;
+export const { addGuest, editGuest, editGuests, addResult, } = slice.actions;
 
 // storeの生成
 export const store = configureStore({

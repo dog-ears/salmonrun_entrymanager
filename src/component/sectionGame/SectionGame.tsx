@@ -4,7 +4,7 @@ import './SectionGame.scss';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { useTypedSelector, editGuests } from 'store';
+import { useTypedSelector, editGuests, addResult } from 'store';
 
 // lib
 import _ from 'lodash'
@@ -16,10 +16,12 @@ const SectionGuest: React.FC<Props> = (props) => {
   // dispatch
   const dispatch = useDispatch();
 
-  // selector
+  // selector（storeStateの取得）
   const guests = useTypedSelector(state => state.guests)
+  const results = useTypedSelector(state => state.results)
 
   // handle（クリックなど画面操作時の処理）
+  // 参加者交代
   const handleAddPlayerGameCount = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
     e.preventDefault()
@@ -32,6 +34,19 @@ const SectionGuest: React.FC<Props> = (props) => {
 
     // データ更新
     dispatch(editGuests(players));
+  }
+
+  // ゲーム結果追加
+  const handleAddResult = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, gameResult: boolean) => {
+
+    e.preventDefault()
+
+    // データ更新
+    dispatch(addResult({
+      id: 0,
+      isVictory: gameResult,
+      players: getPlayerAtN(0).map((player) => player.id)
+    }));
   }
 
   // n回目の参加者を取得する
@@ -52,8 +67,14 @@ const SectionGuest: React.FC<Props> = (props) => {
   return (
     <section className="section-game">
       <form action="">
-        <h1>1<small>戦目（2戦交代）</small></h1>
-        <div className="result">3<small>勝</small>3<small>敗</small><br /><small>（●〇●●〇●●〇●●）</small></div>
+        <h1>{results.length + 1}<small>戦目（2戦交代）</small></h1>
+        <div className="result">{results.filter((result) => result.isVictory).length}<small>勝</small>{results.filter((result) => !result.isVictory).length}<small>敗</small>
+          {results.length > 0 &&
+            <small className="star">（{results.map(
+              (result) => result.isVictory ? '●' : '〇'
+            )}）</small>
+          }
+        </div>
         <h2>参加中のゲスト</h2>
         <div className="guests">
           <ul>
@@ -80,8 +101,8 @@ const SectionGuest: React.FC<Props> = (props) => {
         </div>
         <div className="btn-basic _mt10">
           <ul>
-            <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>勝利</button></li>
-            <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>敗北</button></li>
+            <li><button onClick={(e) => { handleAddResult(e, true) }}><i className="fas fa-angle-right"></i>勝利</button></li>
+            <li><button onClick={(e) => { handleAddResult(e, false) }}><i className="fas fa-angle-right"></i>敗北</button></li>
             <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>参加者交代</button></li>
           </ul>
         </div>

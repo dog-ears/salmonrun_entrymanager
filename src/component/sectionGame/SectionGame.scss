@@ -17,6 +17,9 @@
     > .result{
       text-align: center;
       font-size: 30px;
+      > .star{
+        display: block;
+      }
       & + h2{
         margin-top: 40px;
       }
