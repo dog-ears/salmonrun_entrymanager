@@ -235,11 +235,21 @@ const slice = createSlice({
       saveState(result)
       return result
     },
+
+    // リザルト全削除
+    deleteAllResults: (state) => {
+      const result = {
+        ...state,
+        results: []
+      }
+      saveState(result)
+      return result
+    },
   },
 })
 
 // action（各コンポーネントから、dispatchで呼ばれる）
-export const { addGuest, editGuest, editGuests, deleteAllGuests, addResult, } = slice.actions;
+export const { addGuest, editGuest, editGuests, deleteAllGuests, addResult, deleteAllResults, } = slice.actions;
 
 // storeの生成
 export const store = configureStore({
