@@ -6,6 +6,7 @@
   border-left: 1px dashed #fff;
   @include sp{
     width: 100%;
+    margin-top: 40px;
   }
   > h2{
     font-size: 24px;
