@@ -4,7 +4,7 @@ import './SectionGame.scss';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { useTypedSelector, editGuests, addResult, deleteAllResults } from 'store';
+import { useTypedSelector, editGuests, addResult, deleteLastResult, deleteAllResults } from 'store';
 
 // lib
 import _ from 'lodash'
@@ -47,6 +47,13 @@ const SectionGuest: React.FC<Props> = (props) => {
       isVictory: gameResult,
       players: getPlayerAtN(0).map((player) => player.id)
     }));
+  }
+
+  // ゲーム結果最後のひとつを削除
+  const handleClearLastResult = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+    e.preventDefault()
+    dispatch(deleteLastResult())
   }
 
   // ゲーム結果クリア
@@ -114,6 +121,7 @@ const SectionGuest: React.FC<Props> = (props) => {
             <li><button onClick={(e) => { handleAddResult(e, true) }}><i className="fas fa-angle-right"></i>勝利</button></li>
             <li><button onClick={(e) => { handleAddResult(e, false) }}><i className="fas fa-angle-right"></i>敗北</button></li>
             <li><button onClick={(e) => { handleAddPlayerGameCount(e) }}><i className="fas fa-angle-right"></i>参加者交代</button></li>
+            <li><button onClick={(e) => { handleClearLastResult(e) }}><i className="fas fa-trash-alt"></i>勝敗記録を一つ削除する</button></li>
             <li><button onClick={(e) => { handleClearAllResults(e) }}><i className="fas fa-trash-alt"></i>勝敗記録をクリアする</button></li>
           </ul>
         </div>
