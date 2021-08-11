@@ -8,8 +8,23 @@
   }
   > form{
     > h1{
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
       text-align: center;
       font-size: 46px;
+      > input{
+        display: inline-block;
+        width: 0.8em;
+        font-size: 80%;
+        &:hover{
+          background-color: #666;
+        }
+        &:focus{
+          background-color: #fff;
+          color: #000;
+        }
+      }
       & + .result{
         margin-top: 20px;
       }
