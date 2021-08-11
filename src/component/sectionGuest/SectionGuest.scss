@@ -9,6 +9,9 @@
   }
   > h2{
     font-size: 24px;
+    & + .lead{
+      margin-top: 10px;
+    }
   }
   > .guests{
     > table{
@@ -38,8 +41,15 @@
       }
     }
     > .noGuest{
+      width: 312px;
       padding: 30px;
       text-align: center;
     }
+    & +h2{
+      margin-top: 40px;
+    }
+  }
+  > .lead{
+    line-height: 1.4em;
   }
 }
