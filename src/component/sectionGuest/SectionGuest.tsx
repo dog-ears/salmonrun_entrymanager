@@ -1,10 +1,10 @@
 // basic
-import React from 'react';
+import React, { useState } from 'react';
 import './SectionGuest.scss';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { useTypedSelector, addGuest, deleteAllGuests } from 'store';
+import { useTypedSelector, addGuest, deleteAllGuests, GuestType } from 'store';
 
 // component
 import SectionGuestTd from 'component/sectionGuestTd/SectionGuestTd'
@@ -22,6 +22,10 @@ const SectionGuest: React.FC<Props> = (props) => {
   // selector
   const guests = useTypedSelector(state => state.guests)
 
+  // state
+  const [sortBy, setSortBy] = useState<keyof GuestType>('order')
+  const [sortDirAsc, setSortDirAsc] = useState<boolean>(true)
+
   // handle（クリックなど画面操作時の処理）
   // ゲストの追加
   const handleAddGuest = () => {
@@ -34,6 +38,26 @@ const SectionGuest: React.FC<Props> = (props) => {
     if (window.confirm("ゲストを全て削除します。よろしいですか？")) {
       dispatch(deleteAllGuests())
     }
+  }
+
+  // ソート
+  const handleClickSort = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, column: keyof GuestType) => {
+    e.preventDefault()
+
+
+    if (sortBy === column) {
+      // ソートカラムが、現在と同じだった場合は、ソートディレクションが変わる
+      setSortDirAsc(!sortDirAsc)
+    } else {
+      // ソートカラムが変更だった場合は、ソートカラムを変更しつつ、ディレクションをascにする
+      setSortBy(column)
+      setSortDirAsc(true)
+    }
+  }
+
+  // ソートされたguestの取得
+  const getGuests = (): GuestType[] => {
+    return _.orderBy(guests, [sortBy], sortDirAsc ? 'asc' : 'desc')
   }
 
   return (
@@ -49,15 +73,15 @@ const SectionGuest: React.FC<Props> = (props) => {
         <table>
           <thead>
             <tr>
-              <th>Order</th>
-              <th>googleネーム</th>
-              <th>switchネーム</th>
-              <th>参加回数</th>
-              <th>状態</th>
+              <th><span onClick={(e) => { handleClickSort(e, 'order') }}>Order</span> {sortBy === 'order' && (sortDirAsc ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>)}</th>
+              <th><span onClick={(e) => { handleClickSort(e, 'gName') }}>googleネーム</span> {sortBy === 'gName' && (sortDirAsc ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>)}</th>
+              <th><span onClick={(e) => { handleClickSort(e, 'sName') }}>switchネーム</span> {sortBy === 'sName' && (sortDirAsc ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>)}</th>
+              <th><span onClick={(e) => { handleClickSort(e, 'entrytimes') }}>参加回数</span> {sortBy === 'entrytimes' && (sortDirAsc ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>)}</th>
+              <th><span onClick={(e) => { handleClickSort(e, 'isActive') }}>状態</span> {sortBy === 'isActive' && (sortDirAsc ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>)}</th>
             </tr>
           </thead>
           <tbody>
-            {_.sortBy(guests, ['order']).map((guest) => (
+            {getGuests().map((guest) => (
               <tr key={guest.id} id={`guest${guest.id}`} className={!guest.isActive ? '-disActive' : ''}>
                 <SectionGuestTd guestId={guest.id} guestProp='order' />
                 <SectionGuestTd guestId={guest.id} guestProp='gName' />
