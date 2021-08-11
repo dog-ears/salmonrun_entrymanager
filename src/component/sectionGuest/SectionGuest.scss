@@ -1,7 +1,7 @@
 @import "../../mixin";
 
 .section-guest{
-  width: calc(100% - 600px);
+  width: calc(100% - 300px);
   padding: 10px;
   border-left: 1px dashed #fff;
   @include sp{
@@ -9,9 +9,12 @@
   }
   > .guests{
     > table{
-      width: 100%;
+
       > thead,tbody{
         > tr{
+          &.-disActive{
+            opacity: 0.3;
+          }
           th,td{
             padding: 5px;
             line-height: 1.6em;

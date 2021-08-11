@@ -58,7 +58,7 @@ const SectionGuest: React.FC<Props> = (props) => {
           </thead>
           <tbody>
             {_.sortBy(guests, ['order']).map((guest) => (
-              <tr key={guest.id} id={`guest${guest.id}`}>
+              <tr key={guest.id} id={`guest${guest.id}`} className={!guest.isActive ? '-disActive' : ''}>
                 <SectionGuestTd guestId={guest.id} guestProp='order' />
                 <SectionGuestTd guestId={guest.id} guestProp='gName' />
                 <SectionGuestTd guestId={guest.id} guestProp='sName' />
