@@ -62,7 +62,7 @@ const SectionGuest: React.FC<Props> = (props) => {
                 <SectionGuestTd guestId={guest.id} guestProp='order' />
                 <SectionGuestTd guestId={guest.id} guestProp='gName' />
                 <SectionGuestTd guestId={guest.id} guestProp='sName' />
-                <td>{guest.entrytimes}</td>
+                <SectionGuestTd guestId={guest.id} guestProp='entrytimes' />
                 <SectionGuestTd guestId={guest.id} guestProp='isActive' />
               </tr>
             ))}

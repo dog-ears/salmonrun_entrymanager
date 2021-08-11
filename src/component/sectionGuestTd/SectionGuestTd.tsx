@@ -50,15 +50,15 @@ const SectionGuestTd: React.FC<Props> = (props) => {
 
     let newData = e.currentTarget.value
 
-    // orderのときはバリデーションを行う
-    if (props.guestProp === 'order') {
+    // order、entrytimesのときはバリデーションを行う
+    if (props.guestProp === 'order' || props.guestProp === 'entrytimes') {
 
       // 入力が数値以外だったら、エラーを出して、古いデータを入れる
       if (!Number.isInteger(Number(newData))) {
-        alert('Orderに数値以外が入力されました')
+        alert('数値を入力してください')
 
         // 古いデータに差し替え
-        e.currentTarget.value = String(guests[props.guestId - 1].order)
+        e.currentTarget.value = String(guests[props.guestId - 1][props.guestProp])
 
         // inputを隠す
         setIsEditing(false)
@@ -74,8 +74,8 @@ const SectionGuestTd: React.FC<Props> = (props) => {
       let newGuest = _.cloneDeep(guests[props.guestId - 1])
 
       // 入力されたデータを格納
-      if (props.guestProp === 'order') {
-        newGuest.order = Number(newData)
+      if (props.guestProp === 'order' || props.guestProp === 'entrytimes') {
+        newGuest[props.guestProp] = Number(newData)
       } else if (props.guestProp === 'gName' || props.guestProp === 'sName') {
         newGuest[props.guestProp] = newData
       }
@@ -96,7 +96,7 @@ const SectionGuestTd: React.FC<Props> = (props) => {
     dispatch(editGuest(newGuest));
   }
 
-  if (props.guestProp === 'order' || props.guestProp === 'gName' || props.guestProp === 'sName') {
+  if (props.guestProp === 'order' || props.guestProp === 'gName' || props.guestProp === 'sName' || props.guestProp === 'entrytimes') {
     return (
       <td
         className={`sectionGuestTd${isEditing ? ' -editting' : ''}`}
