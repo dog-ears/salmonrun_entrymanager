@@ -6,7 +6,19 @@
   border-left: 1px dashed #fff;
   @include sp{
     width: 100%;
-    margin-top: 40px;
+    margin-top: 46px;
+  }
+  > h1{
+    font-size: 40px;
+    @include sp{
+      display: none;
+    }
+    & + h2{
+      margin-top: 30px;
+      @include sp{
+        margin-top: 0;
+      }
+    }
   }
   > h2{
     font-size: 24px;
@@ -47,7 +59,7 @@
       text-align: center;
     }
     & +h2{
-      margin-top: 40px;
+      margin-top: 30px;
     }
   }
   > .lead{

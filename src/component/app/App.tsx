@@ -23,6 +23,7 @@ const App: React.FC<Props> = (props) => {
       {/* <section className="section-setting">
         <h2>設定</h2>
       </section> */}
+      <div className="ad"></div>
     </div>
   );
 }

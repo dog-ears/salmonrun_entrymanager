@@ -12,19 +12,16 @@
 }
 .App {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   font-family: Splatoon2;
   color: #fff;
   @include sp{
     flex-wrap: wrap;
   }
-  > .section-setting{
-    width: 300px;
-    padding: 10px;
-    border-left: 1px dashed #fff;
-    @include sp{
-      width: 100%;
-    }
+  > .ad{
+    display: block;
+    width: 100%;
   }
 }
 

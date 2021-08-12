@@ -62,6 +62,7 @@ const SectionGuest: React.FC<Props> = (props) => {
 
   return (
     <section className="section-guest">
+      <h1>サーモンラン 参加型配信 参加者管理ツール</h1>
       <h2>ゲスト一覧</h2>
       <div className="btn-basic _mt10">
         <ul>
@@ -99,7 +100,7 @@ const SectionGuest: React.FC<Props> = (props) => {
       <h2>つかいかた</h2>
       <p className="lead">
         ■ 左カラム<br />
-        ・ここを配信画面に埋め込んでください。<br />
+        ・配信画面に埋め込んでください。<br />
         ・「〇戦交代」の数字部分はクリックして変更できます。<br />
         ・１戦終了時に「勝利」または「敗北」をおして、参加者交代するときは「参加者交代」を押してください。<br />
         <br />

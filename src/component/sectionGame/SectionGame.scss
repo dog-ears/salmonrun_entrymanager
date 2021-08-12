@@ -7,6 +7,22 @@
     width: 100%;
   }
   > form{
+    > .topTtl{
+      text-align: center;
+      font-size: 46px;
+      @include pc{
+        display: none;
+      }
+      > span{
+        display: inline-block;
+      }
+      & + h1{
+        margin-top: 40px;
+        @include pc{
+          margin-top: 0;
+        }
+      }
+    }
     > h1{
       display: flex;
       justify-content: center;
