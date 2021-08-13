@@ -1,5 +1,5 @@
 // basic
-import React from 'react';
+import React, { useState } from 'react';
 import './SectionGame.scss';
 
 // redux
@@ -19,6 +19,9 @@ const SectionGuest: React.FC<Props> = (props) => {
   // selector（storeStateの取得）
   const guests = useTypedSelector(state => state.guests)
   const results = useTypedSelector(state => state.results)
+
+  // state
+  const [playerCount, setPlayerCount] = useState<number>(3)
 
   // handle（クリックなど画面操作時の処理）
   // 参加者交代
@@ -76,9 +79,19 @@ const SectionGuest: React.FC<Props> = (props) => {
     allPlayers = _.sortBy(allPlayers, ['entrytimes', 'order'])
 
     // n回目の参加者を取得
-    let players = _.slice(allPlayers, 0 + 3 * n, 3 + 3 * n)
+    let players = _.slice(allPlayers, 0 + playerCount * n, playerCount + playerCount * n)
 
     return players
+  }
+
+  // 
+  const handleChangePlayerCount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = Number(e.target.value)
+    if (isNaN(v)) {
+      alert('数値を入力してください')
+      return false
+    }
+    setPlayerCount(v)
   }
 
   return (
@@ -126,6 +139,7 @@ const SectionGuest: React.FC<Props> = (props) => {
             <li><button onClick={(e) => { handleClearAllResults(e) }}><i className="fas fa-trash-alt"></i>勝敗記録をクリアする</button></li>
           </ul>
         </div>
+        <div className="playerCount"><span>参加者人数：</span><input type="text" value={playerCount} onChange={(e) => handleChangePlayerCount(e)} /><span>人</span></div>
       </form>
     </section>
   );
