@@ -212,6 +212,20 @@ const slice = createSlice({
       return result
     },
 
+    // ゲスト全休眠
+    sleepAllGuests: (state) => {
+
+      const result = {
+        ...state,
+        guests: _.map(state.guests, (guest) => ({
+          ...guest,
+          isActive: false
+        }))
+      }
+      saveState(result)
+      return result
+    },
+
     // ゲスト全削除
     deleteAllGuests: (state) => {
 
@@ -259,7 +273,7 @@ const slice = createSlice({
 })
 
 // action（各コンポーネントから、dispatchで呼ばれる）
-export const { addGuest, editGuest, editGuests, deleteAllGuests, addResult, deleteLastResult, deleteAllResults, } = slice.actions;
+export const { addGuest, editGuest, editGuests, sleepAllGuests, deleteAllGuests, addResult, deleteLastResult, deleteAllResults, } = slice.actions;
 
 // storeの生成
 export const store = configureStore({
