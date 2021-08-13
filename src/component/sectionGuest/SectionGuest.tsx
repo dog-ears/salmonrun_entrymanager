@@ -67,7 +67,7 @@ const SectionGuest: React.FC<Props> = (props) => {
 
   return (
     <section className="section-guest">
-      <h1>サーモンラン 参加型配信 参加者管理ツール</h1>
+      <h1>参加型配信 参加者管理ツール</h1>
       <h2>ゲスト一覧</h2>
       <div className="btn-basic _mt10">
         <ul>
