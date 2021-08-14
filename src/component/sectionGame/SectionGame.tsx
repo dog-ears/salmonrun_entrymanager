@@ -97,7 +97,7 @@ const SectionGuest: React.FC<Props> = (props) => {
   return (
     <section className="section-game">
       <form action="">
-        <div className="topTtl"><span>サーモンラン</span> <span>参加型配信</span> <span>参加者管理ツール</span></div>
+        <div className="topTtl"><span>参加型配信</span> <span>参加者管理ツール</span></div>
         <h1>{results.length + 1}<small>戦目（ </small><input type="text" defaultValue="2" /><small>戦交代）</small></h1>
         <div className="result">{results.filter((result) => result.isVictory).length}<small>勝</small>{results.filter((result) => !result.isVictory).length}<small>敗</small>
           {results.length > 0 &&
