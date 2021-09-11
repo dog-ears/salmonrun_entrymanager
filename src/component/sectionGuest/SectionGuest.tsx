@@ -4,7 +4,7 @@ import './SectionGuest.scss';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { useTypedSelector, addGuest, sleepAllGuests, deleteAllGuests, GuestType } from 'store';
+import { useTypedSelector, addGuest, sleepAllGuests, resetAllGuestsCount, deleteAllGuests, GuestType } from 'store';
 
 // component
 import SectionGuestTd from 'component/sectionGuestTd/SectionGuestTd'
@@ -35,6 +35,11 @@ const SectionGuest: React.FC<Props> = (props) => {
   // ゲストを全員休眠状態にする
   const handleSleepAllGuest = () => {
     dispatch(sleepAllGuests())
+  }
+
+  // 全ゲストの参加回数を0にする
+  const handleRestAllGuestCount = () => {
+    dispatch(resetAllGuestsCount())
   }
 
   // ゲストのクリア
@@ -73,6 +78,7 @@ const SectionGuest: React.FC<Props> = (props) => {
         <ul>
           <li><button onClick={handleAddGuest} ><i className="fas fa-user-plus"></i> ゲストを追加する</button></li>
           <li><button onClick={handleSleepAllGuest} ><i className="fas fa-eye-slash"></i> ゲストを全員休眠状態にする</button></li>
+          <li><button onClick={handleRestAllGuestCount} ><i className="fas fa-users"></i> ゲスト全員の参加回数を0にする</button></li>
           <li><button onClick={(e) => { handleClearGuest(e) }} ><i className="fas fa-trash-alt"></i> ゲストをクリアする</button></li>
         </ul>
       </div>

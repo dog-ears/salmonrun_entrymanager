@@ -226,6 +226,20 @@ const slice = createSlice({
       return result
     },
 
+    // 全ゲスト参加回数クリア
+    resetAllGuestsCount: (state) => {
+
+      const result = {
+        ...state,
+        guests: _.map(state.guests, (guest) => ({
+          ...guest,
+          entrytimes: 0
+        }))
+      }
+      saveState(result)
+      return result
+    },
+
     // ゲスト全削除
     deleteAllGuests: (state) => {
 
@@ -273,7 +287,7 @@ const slice = createSlice({
 })
 
 // action（各コンポーネントから、dispatchで呼ばれる）
-export const { addGuest, editGuest, editGuests, sleepAllGuests, deleteAllGuests, addResult, deleteLastResult, deleteAllResults, } = slice.actions;
+export const { addGuest, editGuest, editGuests, sleepAllGuests, resetAllGuestsCount, deleteAllGuests, addResult, deleteLastResult, deleteAllResults, } = slice.actions;
 
 // storeの生成
 export const store = configureStore({
